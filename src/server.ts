@@ -1,12 +1,11 @@
 import express from "express";
 
+import "./database";
+import { routes } from "./routes";
+
 const app = express();
 
-app.get("/", (req, res) => {
-  return res.json({ messege: "opa" });
-});
+app.use(express.json())
+app.use(routes);
 
-app.post("/", (req, res) => {
-  return res.json({ message: "rota post" });
-});
 app.listen(3333, () => console.log("server is running"));
