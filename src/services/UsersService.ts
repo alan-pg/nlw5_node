@@ -7,7 +7,7 @@ class UsersService {
     this.usersRepository = getCustomRepository(UsersRepository);
   }
   async create(email: string) {
-    const userExists = await this.usersRepository.findOne({});
+    const userExists = await this.usersRepository.findOne({ email });
 
     if (userExists) {
       return userExists;
@@ -20,6 +20,16 @@ class UsersService {
     await this.usersRepository.save(user);
 
     return user;
+  }
+
+  async findByEmail(email: string) {
+    const userExists = await this.usersRepository.findOne({ email });
+
+    // if (!userExists) {
+    //   throw new Error("User does not exists.");
+    // }
+
+    return userExists;
   }
 }
 
